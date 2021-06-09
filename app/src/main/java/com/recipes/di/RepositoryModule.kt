@@ -2,6 +2,7 @@ package com.recipes.di
 
 import com.recipes.fragments.search_recipe.SearchRestRepositoryImpl
 import com.recipes.retrofit.model.ApiRequest
+import com.recipes.retrofit.model.ApiRequestImpl
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -12,16 +13,13 @@ import javax.inject.Singleton
 class RepositoryModule {
     @Provides
     @Singleton
-    fun provideRepository(): ApiRequest? {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(ApiRequest.URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        return retrofit.create(ApiRequest::class.java)
+    fun provideRepository(): ApiRequestImpl {
+        return ApiRequestImpl()
     }
 
     @Provides
-    fun provideSearchRepository(apiRequest: ApiRequest): SearchRestRepositoryImpl {
+    @Singleton
+    fun provideSearchRepository(apiRequest: ApiRequestImpl): SearchRestRepositoryImpl {
         return SearchRestRepositoryImpl(apiRequest)
     }
 }
