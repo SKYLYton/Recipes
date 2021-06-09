@@ -18,6 +18,6 @@ class App : Application() {
     }
 
     private fun initDagger() {
-        appComponent = DaggerAppComponent.builder().build()
+        //appComponent = DaggerAppComponent.builder().build()
     }
 }
